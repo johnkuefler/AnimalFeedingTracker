@@ -8,15 +8,17 @@
   <div class="container">
     <h1>Animals</h1>
 
-    <a href="/settings/animals/create" class="btn btn-primary">+ Create</a>
+    <div class="my-3">
+        <a href="/settings/animals/create" class="btn btn-primary">+ Create</a>
+    </div>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" id="animalTable">
         <thead>
             <tr>
                 <td>Species</td>
                 <td>NickName</td>
                 <td>Enabled</td>
-                <td></td>
+                <td>Actions</td>
             </tr>
         </thead>
         <% for(var i=0; i<data.length; i++) { %>
@@ -33,6 +35,14 @@
   </div>
   
   <% include ../../partials/scripts %>
+
+  <script type="text/javascript">
+    $(document).ready( function () {
+        $('#animalTable').DataTable({  
+            responsive: true 
+        });
+    });
+   </script>
 </body>
 
 </html>
