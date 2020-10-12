@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Animals'}); %>
+
+<body>
+  <% include ../../partials/navbar %>
+
+  <div class="container">
+    <h1>Create Animal</h1>
+
+    <form action="/settings/animals/create" method="POST" class="col-4 mt-5">
+      <input type="text" class="form-control" name="species" placeholder="Species" />
+          <br>
+          <input type="text" class="form-control" name="nickName" placeholder="Nickname" />
+          <br>
+          <label>Enabled:
+            <input type="checkbox" class="form-control" name="enabled" />
+          </label>
+          <br>
+          <input type="submit" value="Submit" class="btn btn-primary mt-5"/>
+      </form>
+  </div>
+
+  <% include ../../partials/scripts %>
+</body>
+
+</html>
