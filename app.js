@@ -7,6 +7,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const settingsRouter = require('./routes/settings');
 const animalsRouter = require('./routes/animals');
+const foodsRouter = require('./routes/foods');
+const medicinesRouter = require('./routes/medicines');
+const usersRouter = require('./routes/users');
 
 const mongoose = require('mongoose');
 
@@ -29,6 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/settings', settingsRouter);
 app.use('/settings/animals', animalsRouter);
+app.use('/settings/foods', foodsRouter);
+app.use('/settings/medicines', medicinesRouter);
+app.use('/settings/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
