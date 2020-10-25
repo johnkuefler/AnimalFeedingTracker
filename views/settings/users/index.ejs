@@ -7,6 +7,33 @@
 
   <div class="container">
     <h1>Users</h1>
+
+    <div class="my-3">
+        <a href="/settings/users/create" class="btn btn-primary">+ Create</a>
+    </div>
+
+    <table class="table table-bordered table-striped" id="animalTable">
+        <thead>
+            <tr>
+                <td>First</td>
+                <td>Last</td>
+                <td>Email</td>
+                <td>Role</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <% for(var i=0; i<data.length; i++) { %>
+            <tr>
+                <td><%= data[i].firstName %></td>
+                <td><%= data[i].lastName %></td>
+                <td><%= data[i].email %></td>
+                <td><%= data[i].role %></td>
+                <td><a href="/settings/users/update?id=<%=data[i]._id%>">Update</a> 
+                    | <a href="/settings/users/delete?id=<%=data[i]._id%>">Delete</a></td>
+            </tr>
+        <% } %>
+    </table>
+
   </div>
   
   <% include ../../partials/scripts %>
