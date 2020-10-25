@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Food'}); %>
+
+<body>
+  <% include ../../partials/navbar %>
+
+  <div class="container">
+    <form action="/settings/medicines/update" method="POST" class="col-4">
+      <h1>Update Medicine</h1>
+      <input type="hidden" name="id" value="<%=data._id%>" />
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter food" name="name"
+          value="<%=data.name%>" />
+      </div>
+     
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+  </div>
+
+  <% include ../../partials/scripts %>
+</body>
+
+</html>

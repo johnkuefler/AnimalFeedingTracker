@@ -1,8 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const medicinesController = require('../controllers/medicineController');
+const medicineController = require('../controllers/medicineController');
 
-router.get('/', medicinesController.get_index);
+router.get('/', medicineController.get_index);
+
+router.get('/create', medicineController.get_create);
+
+router.post('/create', medicineController.post_create);
+
+router.get('/update', medicineController.get_update);
+
+router.post('/update', medicineController.post_update);
+
+router.get('/delete', medicineController.get_delete);
 
 module.exports = router;
-

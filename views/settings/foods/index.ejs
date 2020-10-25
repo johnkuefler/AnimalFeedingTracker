@@ -6,11 +6,39 @@
   <% include ../../partials/navbar %>
 
   <div class="container">
-    <h1>Foods</h1>
+    <h1>Food Types</h1>
+
+    <div class="my-3">
+        <a href="/settings/foods/create" class="btn btn-primary">+ Create</a>
+    </div>
+
+    <table class="table table-bordered table-striped" id="animalTable">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <% for(var i=0; i<data.length; i++) { %>
+            <tr>
+                <td><%= data[i].name %></td>
+                <td><a href="/settings/foods/update?id=<%=data[i]._id%>">Update</a> 
+                    | <a href="/settings/foods/delete?id=<%=data[i]._id%>">Delete</a></td>
+            </tr>
+        <% } %>
+    </table>
+
   </div>
   
   <% include ../../partials/scripts %>
 
+  <script type="text/javascript">
+    $(document).ready( function () {
+        $('#animalTable').DataTable({  
+            responsive: true 
+        });
+    });
+   </script>
 </body>
 
 </html>
