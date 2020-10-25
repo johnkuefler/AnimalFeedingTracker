@@ -10,6 +10,12 @@ const animalsRouter = require('./routes/animals');
 const foodsRouter = require('./routes/foods');
 const medicinesRouter = require('./routes/medicines');
 const usersRouter = require('./routes/users');
+const accountsRouter = require('./routes/accounts');
+
+const passport = require('passport');
+const flash    = require('connect-flash');
+const bodyParser = require('body-parser');
+
 
 const mongoose = require('mongoose');
 
@@ -23,11 +29,37 @@ mongoose.connect(process.env['CONNECTION'], {useNewUrlParser: true, useUnifiedTo
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(bodyParser.json());
+const session = require('express-session');
+require('./config/passport')(passport);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+// app.use(bodyParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// required for passport
+app.use(session({
+  secret: 'devkey',
+  resave: true,
+  saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+// require('./routes')(app, passport);
 
 app.use('/', indexRouter);
 app.use('/settings', settingsRouter);
@@ -35,6 +67,7 @@ app.use('/settings/animals', animalsRouter);
 app.use('/settings/foods', foodsRouter);
 app.use('/settings/medicines', medicinesRouter);
 app.use('/settings/users', usersRouter);
+app.use('/account', accountsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
