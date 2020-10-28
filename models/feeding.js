@@ -5,7 +5,7 @@ const {Schema} = mongoose;
 const feedingSchema = new Schema({
   animalSpecies: {type: String, required: true},
   animalNickName: {type: String, required: true},
-  food: {type: Boolean, required: true},
+  food: {type: String, required: true},
   medicine: {type: String, required: false},
   goalWeightOfAnimal: {type: Number},
   actualWeightOfAnimal: {type: Number},

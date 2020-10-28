@@ -14,35 +14,38 @@ exports.get_index = function(req, res) {
 };
 
 exports.get_create = async function(req, res) {
-  const animals = await Animal.find({});
+  const animals = await Animal.find({enabled: true});
   const foods = await Food.find({});
   const medicines = await Medicine.find({});
-
-  console.log(foods);
 
   res.render('feedings/create',
       {animals: animals, foods: foods, medicines: medicines});
 };
 
-exports.post_create = function(req, res) {
-  //   let enabled = false;
-  //   if (req.body.enabled == 'on') {
-  //     enabled = true;
-  //   }
+exports.post_create = async function(req, res) {
+  const animal = await Animal.findOne({_id: req.body.animalId});
 
-  //   const newAnimal = new Animal({
-  //     species: req.body.species,
-  //     nickName: req.body.nickName,
-  //     enabled: enabled,
-  //   });
+  const newfeeding = new Feeding({
+    animalSpecies: animal.species,
+    animalNickName: animal.nickName,
+    food: req.body.food,
+    medicine: req.body.medicine,
+    goalWeightOfAnimal: req.body.goalWeightOfAnimal,
+    amountOfFoodFed: req.body.amountOfFoodFed,
+    leftoverFood: req.body.leftoverFood,
+    comments: req.body.comments,
+    weatherConditions: req.body.weatherConditions,
+    dateTime: req.body.date,
+    keeperName: res.locals.user.firstName + ' ' + res.locals.user.lastName,
+  });
 
-  //   newAnimal.save(function(err) {
-  //     if (err) {
-  //       console.error(err);
-  //     } else {
-  //       res.redirect('/settings/animals');
-  //     }
-  //   });
+  newfeeding.save(function(err) {
+    if (err) {
+      console.error(err);
+    } else {
+      res.redirect('/feedings');
+    }
+  });
 };
 
 exports.get_update = function(req, res) {
