@@ -45,6 +45,7 @@ exports.get_update = function(req, res) {
 
 exports.post_update = function(req, res) {
   const updateData = {
+    email: req.body.email,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     role: req.body.role,

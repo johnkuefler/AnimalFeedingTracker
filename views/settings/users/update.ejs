@@ -16,7 +16,9 @@
         <div class="alert alert-danger"><%= message %></div>
         <% } %>
 
-        <form action="/settings/users/create" method="post">
+        <form action="/settings/users/update" method="post">
+            <input type="hidden" name="id" value="<%=data.id%>"/>
+
             <div class="form-group">
                 <label>Email</label>
                 <input required type="text" class="form-control" name="email" value="<%=data.email%>">
@@ -40,6 +42,7 @@
                     <option value="User">User</option>
                 </select>
             </div>
+
             <button type="submit" class="btn btn-warning btn-lg">Update</button>
         </form>
     </div>
