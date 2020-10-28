@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/header', {title: 'Feedings'}); %>
+
+<body>
+  <% include ../partials/navbar %>
+
+  <div class="container">
+    <form action="/feedings/create" method="POST" class="col-4">
+      <h1>Create Feeding</h1>
+      
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" placeholder="Enter date" name="date">
+      </div>
+
+      <div class="form-group">
+        <label for="animalId">Animal</label>
+        <select required class="form-control" name="animalId">
+            <option></option>
+            <% for(var i=0; i<animals.length; i++) { %>
+                <option value="<%=animals[i]._id%>">
+                    <%=animals[i].species%> - <%=animals[i].nickName%>
+                </option>
+            <% } %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="foodType">Food</label>
+        <select required class="form-control" name="foodType">
+            <option></option>
+            <% for(var i=0; i<foods.length; i++) { %>
+                <option value="<%=foods[i].name%>">
+                    <%=foods[i].name%>
+                </option>
+            <% } %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="foodType">Medicine (Optional)</label>
+        <select required class="form-control" name="medicineType">
+            <option></option>
+            <% for(var i=0; i<medicines.length; i++) { %>
+                <option value="<%=medicines[i].name%>">
+                    <%=medicines[i].name%>
+                </option>
+            <% } %>
+        </select>
+      </div>
+
+      <p>Still need some more fields...</p>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <% include ../partials/scripts %>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ const foodsRouter = require('./routes/foods');
 const medicinesRouter = require('./routes/medicines');
 const usersRouter = require('./routes/users');
 const accountsRouter = require('./routes/accounts');
+const feedingsRouter = require('./routes/feedings');
 
 const passport = require('passport');
 const flash    = require('connect-flash');
@@ -59,8 +60,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// require('./routes')(app, passport);
-
 app.use('/', indexRouter);
 app.use('/settings', settingsRouter);
 app.use('/settings/animals', animalsRouter);
@@ -68,6 +67,8 @@ app.use('/settings/foods', foodsRouter);
 app.use('/settings/medicines', medicinesRouter);
 app.use('/settings/users', usersRouter);
 app.use('/account', accountsRouter);
+app.use('/feedings', feedingsRouter);
+app.use('/feedings', feedingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

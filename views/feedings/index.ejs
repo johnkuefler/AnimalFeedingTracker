@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/header', {title: 'Feedings'}); %>
+
+<body>
+  <% include ../partials/navbar %>
+
+  <div class="container">
+    <h1>We'll track feedings here</h1>
+    <a href="/feedings/create" class="btn btn-primary">+ Add Feeding</a>
+    <p>The current user's role is: <%=locals.user.role %></p>
+  </div>
+  
+  <% include ../partials/scripts %>
+</body>
+
+</html>

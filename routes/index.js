@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/ensureAuthenticated');
 /* GET home page. */
 
 router.get('/', authMiddleware.ensureAuthenticated, function(req, res, next) {
-  res.render('index');
+  res.redirect('/feedings');
 });
 module.exports = router;
