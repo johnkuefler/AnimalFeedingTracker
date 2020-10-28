@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Feedings'}); %>
+<%- include('../partials/header', {title: 'Feedings'}); %>
 
 <body>
-  <% include ../../partials/navbar %>
+  <% include ../partials/navbar %>
 
   <div class="container">
-    <form action="/feedings/create" method="POST" class="col-4">
+    <form action="/feedings/create" method="POST" class="col-12">
       <h1>Create Feeding</h1>
       
       <div class="form-group">
@@ -95,7 +95,7 @@
     </form>
   </div>
 
-  <% include ../../partials/scripts %>
+  <% include ../partials/scripts %>
 </body>
 
 </html>
