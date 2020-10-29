@@ -50,8 +50,10 @@ exports.post_update = function(req, res) {
     lastName: req.body.lastName,
     role: req.body.role,
   };
+
+  const user = new User();
   if (req.body.password) {
-    updateData.password = User.generateHash(req.body.password);
+    updateData.password = user.generateHash(req.body.password);
   }
 
   User.findOneAndUpdate({_id: req.body.id}, updateData, function(err, data) {
