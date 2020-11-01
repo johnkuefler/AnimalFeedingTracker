@@ -3,14 +3,10 @@ const Animal = require('../models/animal');
 const Food = require('../models/food');
 const Medicine = require('../models/medicine');
 
-exports.get_index = function(req, res) {
-  Feeding.find({}, function(err, feedings) {
-    if (err) {
-      // handle error
-    } else {
-      res.render('feedings/index', {data: feedings});
-    }
-  });
+exports.get_index = async function(req, res) {
+  const feedings = await Feeding.find({}).sort({dateTime: 'desc'});
+
+  res.render('feedings/index', {data: feedings});
 };
 
 exports.get_create = async function(req, res) {
