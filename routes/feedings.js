@@ -6,6 +6,8 @@ const authMiddleware = require('../middleware/ensureAuthenticated');
 
 router.get('/', authMiddleware.ensureAuthenticated, feedingsController.get_index);
 
+router.get('/export', authMiddleware.ensureAuthenticated, feedingsController.get_export);
+
 router.get('/create', authMiddleware.ensureAuthenticated, feedingsController.get_create);
 
 router.post('/create', authMiddleware.ensureAuthenticated, feedingsController.post_create);

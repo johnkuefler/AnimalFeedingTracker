@@ -2,11 +2,46 @@ const Feeding = require('../models/feeding');
 const Animal = require('../models/animal');
 const Food = require('../models/food');
 const Medicine = require('../models/medicine');
+const excel = require('exceljs');
 
 exports.get_index = async function(req, res) {
   const feedings = await Feeding.find({}).sort({dateTime: 'desc'});
 
   res.render('feedings/index', {data: feedings});
+};
+
+exports.get_export = async function(req, res) {
+  const feedings = await Feeding.find({}).sort({dateTime: 'desc'});
+
+  const workbook = new excel.Workbook();
+  const worksheet = workbook.addWorksheet('Feedings');
+  worksheet.columns = [
+    {header: 'Date', key: 'dateTime', width: 10},
+    {header: 'Species', key: 'animalSpecies', width: 10},
+    {header: 'Nickname', key: 'animalNickName:', width: 10},
+    {header: 'Food', key: 'food', width: 10},
+    {header: 'Medicine', key: 'medicine', width: 10},
+    {header: 'Goal Weight', key: 'goalWeightOfAnimal', width: 10},
+    {header: 'Actual Weight', key: 'actualWeightOfAnimal', width: 10},
+    {header: 'Amount Fed', key: 'amountOfFoodFed', width: 10},
+    {header: 'Leftover Food', key: 'leftoverFood', width: 10},
+    {header: 'Weather Conditions', key: 'weatherConditions', width: 20},
+    {header: 'Comments', key: 'comments', width: 50},
+  ];
+
+  worksheet.addRows(feedings);
+
+  res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  );
+  res.setHeader(
+      'Content-Disposition',
+      'attachment; filename=' + 'feedings.xlsx',
+  );
+  return workbook.xlsx.write(res).then(function() {
+    res.status(200).end();
+  });
 };
 
 exports.get_create = async function(req, res) {
